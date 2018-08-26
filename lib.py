@@ -1,5 +1,3 @@
-
-
 def Klass(**fields):
     """[summary]
 
@@ -26,10 +24,9 @@ def Klass(**fields):
     >>> cl()
     &data._({'a': 1, 'b': 2, '__data__': ['a', 'b']})
     """
-    fields['__data__'] = list(fields.keys())
+    fields["__data__"] = list(fields.keys())
 
-    class _(type('DataClass', (object,), fields)):
-
+    class _(type("DataClass", (object,), fields)):
         def __init__(self, **class_kwargs):
             for k, val in class_kwargs.items():
                 if k not in fields:
@@ -45,7 +42,8 @@ def Klass(**fields):
             return self.__dict__ == other.__dict__
 
         def __hash__(self):
-            return hash(tuple(fields[k] for k in fields['__data__']))
+            return hash(tuple(fields[k] for k in fields["__data__"]))
+
     return _
 
 
@@ -53,7 +51,8 @@ def main():
     pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
     import doctest
+
     doctest.testmod()
